@@ -19,13 +19,18 @@ void display(Card cards[]);
 void create_deck_of_cards(Card cards[]);
 void shuffle_cards(Card cards[]);
 bool rand_shuffle(Card cards[],Card temp[],int n, int t);
+void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]);
 
 int main()
 {
     Card cards[24];
     create_deck_of_cards(cards);
     shuffle_cards(cards);
-    //display(cards);
+    Card f_deck[24], s_deck[24];
+    deal_cards_out(cards,f_deck,s_deck);
+
+
+    display(f_deck);
 
     return 0;
 }
@@ -68,6 +73,24 @@ bool rand_shuffle(Card cards[],Card temp[],int n, int t){
     }
 
     return false;
+}
+void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]){
+    int i = 0, j = 0, t = 0;
+    while(t < 24){
+        if(t%2 == 0){
+            f_deck[i].figure = cards[t].figure;
+            f_deck[i].sign = cards[t].sign;
+            f_deck[i].weight = cards[t].weight;
+            i++;
+        }
+        else{
+            s_deck[j].figure = cards[t].figure;
+            s_deck[j].sign = cards[t].sign;
+            s_deck[j].weight = cards[t].weight;
+            j++;
+        }
+        t++;
+    }
 }
 
 
