@@ -20,6 +20,7 @@ void create_deck_of_cards(Card cards[]);
 void shuffle_cards(Card cards[]);
 bool rand_shuffle(Card cards[],Card temp[],int n, int t);
 void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]);
+void do_move(Card f_deck[], Card s_deck[]);
 
 int main()
 {
@@ -28,9 +29,13 @@ int main()
     shuffle_cards(cards);
     Card f_deck[24], s_deck[24];
     deal_cards_out(cards,f_deck,s_deck);
+    do_move(f_deck, s_deck);
 
 
-    display(f_deck);
+
+   // display(f_deck);
+    //cout << endl;
+    //display(s_deck);
 
     return 0;
 }
@@ -92,13 +97,83 @@ void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]){
         t++;
     }
 }
+void do_move(Card f_deck[], Card s_deck[]){
+    int rand = 0;
+    Card temp[2];
+    int total = 12, t = 12, licznik = 0;
+    while(total != 24 && t != 24){
+        if(f_deck[0].weight > s_deck[0].weight){
+            temp[0] = f_deck[0];
+            temp[1] = s_deck[0];
+            for(int i = 0; i < total-1; i++){
+                f_deck[i] = f_deck[i+1];
+            }
+            f_deck[total-1] = temp[0];
+            f_deck[total] = temp[1];
+            total++;
 
+            for(int j = 0; j < t; j++){
+                s_deck[j] = s_deck[j+1];
+            }
+            t--;
+
+        }
+        else if(f_deck[0].weight < s_deck[0].weight){
+            temp[0] = s_deck[0];
+            temp[1] = f_deck[0];
+            for(int i = 0; i < t-1; i++){
+                s_deck[i] = s_deck[i+1];
+            }
+            s_deck[t-1] = temp[0];
+            s_deck[t] = temp[1];
+            t++;
+            for(int j = 0; j < total; j++){
+                f_deck[j] = f_deck[j+1];
+            }
+            total--;
+        }
+        else if(f_deck[0].weight == s_deck[0].weight){
+            if(rand % 2 == 0){
+                temp[0] = s_deck[0];
+                temp[1] = f_deck[0];
+                for(int i = 0; i < t-1; i++){
+                    s_deck[i] = s_deck[i+1];
+                }
+                s_deck[t-1] = temp[0];
+                s_deck[t] = temp[1];
+                t++;
+                for(int j = 0; j < total; j++){
+                    f_deck[j] = f_deck[j+1];
+                }
+                total--;
+            }
+            else{
+                temp[0] = f_deck[0];
+                temp[1] = s_deck[0];
+                for(int i = 0; i < total-1; i++){
+                    f_deck[i] = f_deck[i+1];
+                }
+                f_deck[total-1] = temp[0];
+                f_deck[total] = temp[1];
+                total++;
+                for(int j = 0; j < t; j++){
+                    s_deck[j] = s_deck[j+1];
+                }
+                t--;
+            }
+            rand++;
+        }
+        licznik ++;
+    }
+    if(total == 0) cout << "Wygrywa gracz II w rundzie: " << licznik << " !" << endl;
+    else cout << "Wygrywa gracz I w rundzie: " << licznik << " !" << endl;
+}
 
 
 void display(Card cards[]){
     for(int y = 0; y < 24; y++){
-        cout << cards[y].figure << " ";
+        cout << cards[y].figure << ", ";
         cout << cards[y].sign << " ";
-        cout << cards[y].weight << endl;
+        cout << cards[y].weight << " ";
     }
 }
