@@ -12,9 +12,7 @@ struct Card{
     string figure;
     int weight;
 };
-struct Deck{
-    Card deck;
-};
+
 void display(Card cards[]);
 void create_deck_of_cards(Card cards[]);
 void shuffle_cards(Card cards[]);
