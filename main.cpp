@@ -12,14 +12,6 @@ struct Card{
     string figure;
     int weight;
 };
-<<<<<<< HEAD
-
-=======
-struct Deck{
-    Card[] deck;
-	
-};
->>>>>>> refs/remotes/origin/main
 void display(Card cards[]);
 void create_deck_of_cards(Card cards[]);
 void shuffle_cards(Card cards[]);
