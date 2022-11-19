@@ -14,6 +14,7 @@ struct Card{
 };
 struct Deck{
     Card[] deck;
+	
 };
 void display(Card cards[]);
 void create_deck_of_cards(Card cards[]);
@@ -84,6 +85,9 @@ void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]){
     int i = 0, j = 0, t = 0;
     while(t < 24){
         if(t%2 == 0){
+			//mozesz napisac
+			// poprostu f_deck[i] = cards[t]
+			//nie uzywaj jakis f_deck nie wiadomo o co chodzi uzywaj pełnych nazw zeby kod był czytelny
             f_deck[i].figure = cards[t].figure;
             f_deck[i].sign = cards[t].sign;
             f_deck[i].weight = cards[t].weight;
