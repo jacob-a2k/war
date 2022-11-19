@@ -81,18 +81,11 @@ void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]){
     int i = 0, j = 0, t = 0;
     while(t < 24){
         if(t%2 == 0){
-			//mozesz napisac
-			// poprostu f_deck[i] = cards[t]
-			//nie uzywaj jakis f_deck nie wiadomo o co chodzi uzywaj pełnych nazw zeby kod był czytelny
-            f_deck[i].figure = cards[t].figure;
-            f_deck[i].sign = cards[t].sign;
-            f_deck[i].weight = cards[t].weight;
+            f_deck[i]= cards[t];    //nie uzywaj jakis f_deck nie wiadomo o co chodzi uzywaj pełnych nazw zeby kod był czytelny
             i++;
         }
         else{
-            s_deck[j].figure = cards[t].figure;
-            s_deck[j].sign = cards[t].sign;
-            s_deck[j].weight = cards[t].weight;
+            s_deck[j] = cards[t];
             j++;
         }
         t++;
@@ -100,21 +93,27 @@ void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]){
 }
 void do_move(Card f_deck[], Card s_deck[]){
     int rand = 0;
-    //Card temp[2];
     int total = 12, t = 12, licznik = 0;
+    cout << "Aby wystawic karty napisnij ENTER!" << endl;
     while(total != 24 && t != 24){
+        if(getchar() == '\n') cout << f_deck[0].figure << " " << f_deck[0].sign;
+        if(getchar() == '\n') cout << s_deck[0].figure << " " << s_deck[0].sign << endl;
         if(f_deck[0].weight > s_deck[0].weight){
             winner_take_cards(f_deck,s_deck,total,t);
+            cout << "Zabiera gracz I" << endl;
         }
         else if(f_deck[0].weight < s_deck[0].weight){
             winner_take_cards(s_deck,f_deck,t,total);
+            cout << "Zabiera gracz II" << endl;
         }
         else if(f_deck[0].weight == s_deck[0].weight){
             if(rand % 2 == 0){
                 winner_take_cards(s_deck,f_deck,t,total);
+                cout << "Zabiera gracz II" << endl;
             }
             else{
                 winner_take_cards(f_deck,s_deck,total,t);
+                cout << "Zabiera gracz I" << endl;
             }
             rand++;
         }
