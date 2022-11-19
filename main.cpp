@@ -13,7 +13,7 @@ struct Card{
     int weight;
 };
 struct Deck{
-    Card deck;
+    Card[] deck;
 };
 void display(Card cards[]);
 void create_deck_of_cards(Card cards[]);
