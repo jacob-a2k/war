@@ -99,7 +99,6 @@ void do_move(Card f_deck[], Card s_deck[]){
     int total = 12, t = 12, licznik = 0;
     cout << "Aby wystawic karty napisnij ENTER!" << endl;
     while(total != 24 && t != 24){
-        new_line_validation();
         cout << endl;
         new_line_validation();
         cout << f_deck[0].figure << " " << f_deck[0].sign << " ";
