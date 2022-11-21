@@ -1,4 +1,6 @@
 #include <iostream>
+#include <limits>
+#include "utils.h"
 //#include <time.h>
 
 using namespace std;
@@ -19,6 +21,7 @@ bool rand_shuffle(Card cards[],Card temp[],int n, int t);
 void deal_cards_out(Card cards[], Card f_deck[], Card s_deck[]);
 void do_move(Card f_deck[], Card s_deck[]);
 void winner_take_cards(Card winer[], Card loser[],int &total,int &t);
+void new_line_validation();
 
 int main()
 {
@@ -96,8 +99,12 @@ void do_move(Card f_deck[], Card s_deck[]){
     int total = 12, t = 12, licznik = 0;
     cout << "Aby wystawic karty napisnij ENTER!" << endl;
     while(total != 24 && t != 24){
-        if(getchar() == '\n') cout << f_deck[0].figure << " " << f_deck[0].sign;
-        if(getchar() == '\n') cout << s_deck[0].figure << " " << s_deck[0].sign << endl;
+        new_line_validation();
+        cout << endl;
+        new_line_validation();
+        cout << f_deck[0].figure << " " << f_deck[0].sign << " ";
+        new_line_validation();
+        cout << s_deck[0].figure << " " << s_deck[0].sign << endl;
         if(f_deck[0].weight > s_deck[0].weight){
             winner_take_cards(f_deck,s_deck,total,t);
             cout << "Zabiera gracz I" << endl;
@@ -136,6 +143,15 @@ void winner_take_cards(Card winer[], Card loser[],int &total, int &t){
         loser[j] = loser[j+1];
     }
     total++;t--;
+}
+void new_line_validation(){
+    char sign;
+    sign = getch();
+    while(sign != '\n'){
+        cout << "\nPress fucking ENTER!" << endl;
+        cin.clear();
+        sign = getch();
+    }
 }
 
 
